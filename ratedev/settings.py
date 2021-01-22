@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -45,6 +48,7 @@ INSTALLED_APPS = [
     #third-party apps
     'bootstrap4',
     'django_registration',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
@@ -133,3 +137,9 @@ STATICFILES_DIRS = [
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+cloudinary.config( 
+  cloud_name = "kadas", 
+  api_key = "399586485557263", 
+  api_secret = "Tdxx2QuRMek60pXHaOde-1r3iQw" 
+)
