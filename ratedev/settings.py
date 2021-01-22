@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     #third-party apps
     'bootstrap4',
+    'django_registration',
 ]
 
 MIDDLEWARE = [
@@ -82,11 +83,12 @@ WSGI_APPLICATION = 'ratedev.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'devrate',
+        'USER': 'moringa',
+        'PASSWORD':'kadas36',
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -128,3 +130,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
