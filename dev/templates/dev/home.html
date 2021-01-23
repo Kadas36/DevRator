@@ -4,5 +4,23 @@
 
 {% block content %}
 {{block.super}}
-    <h1>Working</h1>
+    
+      
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="col-md-10">
+                {% for project in projects %}
+                    <div class="card" style="color: aliceblue;">
+                        <img alt="Photo" class="card-img-top" src="{{ project.image.url }}"> 
+                        <div class="card-img-overlay">
+                            <h4 class="card-title">Dev: {{ project.developer.user.username | title}}</h4>
+                        </div>
+                    </div>	
+                {% endfor %}
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
 {% endblock %}
