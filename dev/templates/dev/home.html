@@ -8,24 +8,34 @@
       
     
     <div class="container-fluid" id="container">
-        
-        <img src="{{lead_project.image.url}}" alt="">
+        <div class="card" style="color: white;">
+            <img alt="Photo" class="card-img-top" src="{{lead_project.image.url}}"> 
+            <div class="card-img-overlay profileflex">
+                {% if lead_project.developer.profile_pic.url %}
+                    <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
+                {% else %}
+                    <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
+                {% endif %}
+                <h4 class="card-title">{{ lead_project.developer.user.username | title}}</h4>
+            </div>
+        </div>
         
         <div class="row">
             {% for project in projects %}
-                <div class="card" style="color: white;">
-                    <img alt="Photo" class="card-img-top" src="{{ project.image.url }}"> 
-                    <div class="card-img-overlay profileflex">
-                        {% if project.developer.profile_pic.url %}
-                            <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
-                        {% else %}
-                            <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
-                        {% endif %}
-                        <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
+                <div class="col-md-4">
+                    <div class="card mt-4">
+                        <img alt="Photo" class="card-img-top img-fluid" src="{{ project.image.url }}" style="height: 300px; width: auto;">
+                        <div class="card-img-overlay profileflex">
+                            {% if project.developer.profile_pic.url %}
+                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
+                            {% else %}
+                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
+                            {% endif %}
+                            <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
+                        </div>
                     </div>
-                </div>	
-                <h1></h1>
+                </div>    	
             {% endfor %}
         </div>
-    </div>
+    </div> 
 {% endblock %}
