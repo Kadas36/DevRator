@@ -7,6 +7,14 @@ html, body {
 
 /* navbar */
 
+#navbar{
+	position: fixed;
+    top: 0px;
+	left: 0px;
+	right: 0px;
+	z-index: 1;
+}
+
 .navbar {		
 	background: #fff;
 	padding-left: 16px;
@@ -183,4 +191,9 @@ body{
   
 .box input[type = "submit"]:hover{
     background: #2ecc71;
+}
+
+.profileflex{
+    display: flex;
+    margin-left: 50px;
 }

@@ -7,20 +7,22 @@
     
       
     
-    <div class="container">
+    <div class="container-fluid" id="container">
         <div class="row">
-            <div class="col-md-1"></div>
-            <div class="col-md-10">
-                {% for project in projects %}
-                    <div class="card" style="color: aliceblue;">
-                        <img alt="Photo" class="card-img-top" src="{{ project.image.url }}"> 
-                        <div class="card-img-overlay">
-                            <h4 class="card-title">Dev: {{ project.developer.user.username | title}}</h4>
-                        </div>
-                    </div>	
-                {% endfor %}
-            </div>
-            <div class="col-md-1"></div>
+            {% for project in projects %}
+                <div class="card" style="color: white;">
+                    <img alt="Photo" class="card-img-top" src="{{ project.image.url }}"> 
+                    <div class="card-img-overlay profileflex">
+                        {% if project.developer.profile_pic.url %}
+                            <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
+                        {% else %}
+                            <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
+                        {% endif %}
+                        <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
+                    </div>
+                </div>	
+                <h1></h1>
+            {% endfor %}
         </div>
     </div>
 {% endblock %}
