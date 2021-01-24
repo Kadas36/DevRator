@@ -6,7 +6,22 @@ class projectForm(forms.ModelForm):
         model = Project
         exclude = ['developer']
         widgets = {
+            'title': forms.Textarea(
+                attrs={'placeholder': 'add description', 'rows': 1}),
             'description': forms.Textarea(
-                attrs={'placeholder': 'add description', 'rows': 2}),
+                attrs={'placeholder': 'add description', 'rows': 2}),    
                 
         }  
+
+class profileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = []
+        widgets = {
+            'bio': forms.Textarea(
+                attrs={'placeholder': 'add description', 'rows': 2}),
+
+            'user': forms.TextInput(
+                attrs={'readonly':'readonly'}),   
+                
+        }          
