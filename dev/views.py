@@ -25,16 +25,21 @@ def dev_home(request):
 def new_project(request):
     form = projectForm()
     current_user = request.user
-    
-    if request.method == 'POST':
-        form = projectForm(request.POST, request.FILES)
-        if form.is_valid():
-            post = form.save(commit=False)
-            post.developer.user = current_user
-            post.save()
-            return redirect('newpost')
-    else:
-        form = projectForm()
+    current_user_id = current_user.id
+    current_user_profile = Profile.objects.filter(user=current_user)
+    all_profiles = Profile.objects.all()
+
+    for profile in all_profiles:
+        if current_user_id:
+            if request.method == 'POST':
+                form = projectForm(request.POST, request.FILES)
+                if form.is_valid():
+                    post = form.save(commit=False)
+                    post.developer = profile
+                    post.save()
+                    return redirect('newpost')
+            else:
+                form = projectForm()
 
     context = {
         "form": form,
