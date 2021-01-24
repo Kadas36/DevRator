@@ -24,4 +24,17 @@ class profileForm(forms.ModelForm):
             'user': forms.TextInput(
                 attrs={'readonly':'readonly'}),   
                 
-        }          
+        }  
+
+
+class reviewForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        exclude = ['reviewer', 'project']
+        widgets = {
+            'comment': forms.Textarea(
+                attrs={'placeholder': 'add description', 'rows': 2}),                
+        }       
+
+
+

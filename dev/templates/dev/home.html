@@ -23,8 +23,7 @@
         <div class="row">
             {% for project in projects %}
                 <div class="col-md-4">
-                    
-                    <div class="card mt-4" style="color: white;">
+                    <div class="card mt-4">
                         <div class="profileflex ml-0" style="color: black;">
                             {% if project.developer.profile_pic.url %}
                                 <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
@@ -33,14 +32,14 @@
                             {% endif %}
                             <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
                         </div>
-                        <img alt="Photo" class="card-img-top img-fluid" src="{{ project.image.url }}" style="height: 300px; width: auto;">
-                        <div class="card-img-overlay profileflex">
-                            <!-- {% if project.developer.profile_pic.url %}
-                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
-                            {% else %}
-                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
-                            {% endif %}
-                            <h4 class="card-title">{{ project.developer.user.username | title}}</h4> -->
+                        
+                        <div class="container-image" style="position: relative; text-align: center;color: white;">
+                            <img alt="Photo" class="card-img-top img-fluid" src="{{ project.image.url }}" style="height: 300px; width: auto;">
+                            <div class="card-img-overlay profileflex position-button" style="position: absolute; bottom: 10px; right: 2px;">
+                                <div class="view-button">
+                                    <a href="{% url 'review' project_id=project.id %}"><i class="fa fa-share" aria-hidden="true"></i></a>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>    	

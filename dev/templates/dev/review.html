@@ -1,0 +1,52 @@
+{%extends 'dev/base.html'%}
+{% load bootstrap4 %}
+{% load static%}
+
+{% block content %}
+{{block.super}}
+
+<div class="container" id="container">
+    <div class="row flex-lg-nowrap">  
+      <div class="col">
+        <div class="row">
+          <div class="col mb-3">
+            <div class="card">
+              <div class="card-body">
+                <div class="e-profile">
+                  <div class="row">
+                    <div class="col-12 col-sm-auto mb-3">
+                        <img class="card-img-top img-responsive" src="{{project.image.url}}">
+                        <div class="card-img-overlay profileflex">
+                            {% if lead_project.developer.profile_pic.url %}
+                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{ lead_project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
+                            {% else %}
+                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
+                            {% endif %}
+                            <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
+                        </div>
+                    </div>
+                  </div>
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item"><a href="" class="active nav-link">Review</a></li>
+                  </ul>
+                  <div class="tab-content pt-3">
+                    <div class="tab-pane active">
+                        <form method="post" enctype="multipart/form-data">
+                            {%csrf_token%}
+                        
+                            {% bootstrap_form form %}
+                            <input type="submit" value="post">
+                        </form>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    </div>
+    </div>
+
+{% endblock %}

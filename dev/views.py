@@ -3,7 +3,7 @@ import random
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile,Project,Review
 from django.contrib.auth.decorators import login_required
-from .forms import projectForm, profileForm
+from .forms import projectForm, profileForm, reviewForm
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -82,3 +82,30 @@ def profileView(request):
     }
 
     return render(request, 'dev/profile.html', context)
+
+
+@login_required(login_url='/accounts/login/')
+def Reviewview(request, project_id):
+    form = reviewForm()
+    project = get_object_or_404(Project, id=project_id)
+    current_user = request.user
+    project_reviews = Review.objects.filter(project=project_id)
+
+    
+    if request.method == 'POST':
+        form = reviewForm(request.POST)
+        if form.is_valid():
+            review = form.save(commit=False)
+            review.project = project
+            review.reviewer = current_user
+            review.save()
+            return redirect('home')
+    else:
+        form = reviewForm()
+
+    context = {
+        "project": project,
+        "form": form,
+        'project_reviews': project_reviews
+    }
+    return render(request, 'dev/review.html', context)       
