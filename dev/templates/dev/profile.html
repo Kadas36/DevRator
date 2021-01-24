@@ -1,0 +1,88 @@
+{%extends 'dev/base.html'%}
+{% load bootstrap4 %}
+{% block content %}
+{{block.super}}
+{% load cloudinary %}
+    
+<div class="container-fluid" id="container">
+<div class="row flex-lg-nowrap">
+  <div class="col-12 col-lg-auto mb-4" style="width: 250px;">
+    <div class="card p-3">
+      <div class="e-navlist e-navlist--active-bg">
+        <h3>Your projects</h3>  
+        {% for project in cpp %}  
+        <ul class="nav">
+          <li class="nav-item"><a class="nav-link px-2 active" href="./overview.html"><i class="fa fa-fw fa-pencil-square-o mr-1"></i><span>{{project}}</span></a></li>
+        </ul>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <div class="col">
+    <div class="row">
+      <div class="col mb-3">
+        <div class="card">
+          <div class="card-body">
+            <div class="e-profile">
+              <div class="row">
+                <div class="col-12 col-sm-auto mb-3">
+                  <div class="mx-auto" style="width: 140px;">
+                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
+                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
+                        <img src="{{ cp.image.url }}" alt="">
+                      </span>
+                    </div>
+                  </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                    <div class="text-center text-sm-left mb-2 mb-sm-0">
+                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{cp}}</h4>
+                    </div>
+                </div>
+                <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                  <div class="text-center text-sm-left mb-2 mb-sm-0">
+                    <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap"></h4>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <span class="badge badge-secondary">Bio</span>
+                    <div class="text-muted"><small>{{ cp.bio }}</small></div>
+                  </div>
+                </div>
+              </div>
+              <ul class="nav nav-tabs">
+                <li class="nav-item"><a href="" class="active nav-link">Profile</a></li>
+              </ul>
+              <div class="tab-content pt-3">
+                <div class="tab-pane active">
+                    <form method="post" enctype="multipart/form-data">
+                        {%csrf_token%}
+                    
+                        {% bootstrap_form form %}
+                        <input type="submit" value="post">
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-3 mb-3">
+        <div class="card mb-3">
+          <div class="card-body">
+            <div class="px-xl-3">
+              <!-- <button class="btn btn-block btn-secondary"> -->
+                <i class="fa fa-sign-out"></i>
+                <span>Logout</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+</div>
+{% endblock %}

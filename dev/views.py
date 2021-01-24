@@ -3,7 +3,7 @@ import random
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile,Project,Review
 from django.contrib.auth.decorators import login_required
-from .forms import projectForm
+from .forms import projectForm, profileForm
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -47,3 +47,38 @@ def new_project(request):
 
     return render(request, 'dev/new_project.html', context)  
 
+
+@login_required(login_url='/accounts/login/')
+def profileView(request):
+    current_user = request.user 
+    all_profiles = Profile.objects.all()
+    current_user_id = current_user.id    
+    curentProfile = Profile.objects.get(id=current_user_id)
+
+    print(curentProfile)
+
+    form = profileForm( instance= curentProfile)
+    
+    for profile in all_profiles:
+        if current_user_id:
+            if request.method == 'POST':
+                form = profileForm(request.POST, request.FILES, instance=profile)
+                if form.is_valid():
+                    form.save()
+                    return redirect('profile')
+            
+    cp=[]
+    cpp = []
+    for profile in all_profiles:
+        if current_user_id:
+            cp = profile
+            cpp = Project.objects.filter(developer=cp)
+            
+            
+    context = {
+        "cp": cp,
+        'cpp': cpp,
+        'form': form
+    }
+
+    return render(request, 'dev/profile.html', context)

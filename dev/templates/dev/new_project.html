@@ -4,10 +4,10 @@
 
 {% block content %}
 {{block.super}}
-<div class="container">
+<div class="container" id="container">
     {% load cloudinary %}
     <div class="postImage">
-        <h2>Post an image</h2>
+        <h2>Submit Your Project</h2>
         <hr>
         <form method="post" enctype="multipart/form-data">
             {%csrf_token%}
