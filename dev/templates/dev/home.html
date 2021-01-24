@@ -24,7 +24,7 @@
             {% for project in projects %}
                 <div class="col-md-4">
                     <div class="card mt-4">
-                        <div class="profileflex ml-0" style="color: black;">
+                        <div class="profileflex ml-0" style="color: black; background-color: #a4c3b2;">
                             {% if project.developer.profile_pic.url %}
                                 <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
                             {% else %}
@@ -37,7 +37,7 @@
                             <img alt="Photo" class="card-img-top img-fluid" src="{{ project.image.url }}" style="height: 300px; width: auto;">
                             <div class="card-img-overlay profileflex position-button" style="position: absolute; bottom: 10px; right: 2px;">
                                 <div class="view-button">
-                                    <a href="{% url 'review' project_id=project.id %}"><i class="fa fa-share" aria-hidden="true"></i></a>
+                                    <a href="{% url 'review' project_id=project.id %}"><i class="fa fa-share fa-3x" id="fa" aria-hidden="true" style="color: white;"></i></a>
                                 </div>
                             </div>
                         </div>

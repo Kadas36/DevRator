@@ -90,18 +90,21 @@ def Reviewview(request, project_id):
     project = get_object_or_404(Project, id=project_id)
     current_user = request.user
     project_reviews = Review.objects.filter(project=project_id)
+    all_profiles = Profile.objects.all()
+    current_user_id = current_user.id
 
-    
-    if request.method == 'POST':
-        form = reviewForm(request.POST)
-        if form.is_valid():
-            review = form.save(commit=False)
-            review.project = project
-            review.reviewer = current_user
-            review.save()
-            return redirect('home')
-    else:
-        form = reviewForm()
+    for profile in all_profiles:
+        if current_user_id:
+            if request.method == 'POST':
+                form = reviewForm(request.POST)
+                if form.is_valid():
+                    review = form.save(commit=False)
+                    review.project = project
+                    review.reviewer = profile
+                    review.save()
+                    return redirect('home')
+            else:
+                form = reviewForm()
 
     context = {
         "project": project,

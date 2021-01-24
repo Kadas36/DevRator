@@ -29,7 +29,7 @@ class profileForm(forms.ModelForm):
 
 class reviewForm(forms.ModelForm):
     class Meta:
-        model = Profile
+        model = Review
         exclude = ['reviewer', 'project']
         widgets = {
             'comment': forms.Textarea(
