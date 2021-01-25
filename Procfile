@@ -1,0 +1,1 @@
+web: gunicorn ratedev.wsgi --log-file -
