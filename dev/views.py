@@ -12,6 +12,8 @@ from rest_framework.views import APIView
 from .serializer import UserSerializer, ProfileSerializer,ProjectSerializer,ReviewSerializer
 
 from rest_framework import status
+from .permissions import IsAdminOrReadOnly
+
 
 
 # Create your views here.
@@ -162,7 +164,9 @@ class ProfileList(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)   
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+    permission_classes = (IsAdminOrReadOnly,)      
 
 class ProjectList(APIView):
     def get(self, request, format=None):
@@ -175,4 +179,6 @@ class ProjectList(APIView):
         if serializers.is_valid():
             serializers.save()
             return Response(serializers.data, status=status.HTTP_201_CREATED)
-        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)               
+        return Response(serializers.errors, status=status.HTTP_400_BAD_REQUEST)  
+
+    permission_classes = (IsAdminOrReadOnly,)                 
