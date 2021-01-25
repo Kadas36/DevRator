@@ -50,6 +50,7 @@ INSTALLED_APPS = [
     'django_registration',
     'cloudinary',
     'rest_framework',
+    'rest_framework.authtoken',
 ]
 
 MIDDLEWARE = [
@@ -145,4 +146,8 @@ cloudinary.config(
   api_secret = "Tdxx2QuRMek60pXHaOde-1r3iQw" 
 )
 
-CRISPY_TEMPLATE_PACK = 'bootstrap4'
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    )
+}

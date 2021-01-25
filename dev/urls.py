@@ -6,5 +6,6 @@ urlpatterns = [
     path('project/', views.new_project, name='newpost'),
     path('profile/', views.profileView, name='profile'),
     path('project/<int:project_id>/', views.Reviewview, name='review'),
-    path('api/profiles/', views.ProfileList.as_view())
+    path('api/profiles/', views.ProfileList.as_view()),
+    path('api/projects/', views.ProjectList.as_view()),
 ]
