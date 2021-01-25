@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile,Project,Review
 from django.contrib.auth.decorators import login_required
 from .forms import projectForm, profileForm, reviewForm
+from django.db.models import Avg
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -93,6 +94,17 @@ def Reviewview(request, project_id):
     all_profiles = Profile.objects.all()
     current_user_id = current_user.id
 
+    reviews = Review.objects.filter(project=project_id)
+    design_rating_average = reviews.aggregate(Avg("design_rating"))["design_rating__avg"]
+    design_average = round(design_rating_average,1)
+    usability_rating_average = reviews.aggregate(Avg("usability_rating"))["usability_rating__avg"]
+    usability_average = round(usability_rating_average,1)
+    content_rating_average = reviews.aggregate(Avg("content_rating"))["content_rating__avg"]
+    content_average = round(content_rating_average,1)
+
+    sum = design_average+usability_average+content_average
+    average = round(int(sum)/3,2)
+    
     for profile in all_profiles:
         if current_user_id:
             if request.method == 'POST':
@@ -109,6 +121,10 @@ def Reviewview(request, project_id):
     context = {
         "project": project,
         "form": form,
-        'project_reviews': project_reviews
+        'project_reviews': project_reviews,
+        "design_average": design_average,
+        "usability_average": usability_average,
+        "content_average": content_average,
+        "average": average,
     }
     return render(request, 'dev/review.html', context)       

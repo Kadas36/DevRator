@@ -26,6 +26,12 @@
                         </div>
                     </div>
                   </div>
+                  <div class="ratings" style="color: blue; font-weight: bolder;">
+                      <h5 style="color: #991b16;">Rating -{{average}}</h5>
+                      <p>Design -{{design_average}}</p>
+                      <p>Usability -{{usability_average}}</p>
+                      <p>Content -{{content_average}}</p>
+                  </div>
                   <ul class="nav nav-tabs">
                     <li class="nav-item"><a href="" class="active nav-link">Review</a></li>
                   </ul>
@@ -34,24 +40,25 @@
                         <form method="post" enctype="multipart/form-data" action="{% url 'review' project.id %}">
                             {%csrf_token%}
                             <label for="comment">Review</label>
-                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control"></textarea>
+                            <textarea name="comment" id="comment" cols="30" rows="3" class="form-control mt-2"></textarea>
 
-                            <label for="design_rating">Design rating</label>
+                            <label for="design_rating" class="mt-2">Design rating</label>
                             <input type="range" id="rangeInput" name="design_rating" min="0" max="10" value="0" step="0.5" oninput="amount.value=rangeInput.value">
-                            <output name="amount" id="amount" for="rangeInput">0</output>
+                            <output name="amount" id="amount" for="rangeInput" class="mr-4">0</output>
 
-                            <label for="usability_rating">Usability rating</label>
+                            <label for="usability_rating" class="mt-2">Usability rating</label>
                             <input type="range" id="usabilityInput" name="usability_rating" min="0" max="10" value="0" step="0.5" oninput="usabilityValue.value=usabilityInput.value">
-                            <output name="usabilityValue" id="usabilityValue" for="usabilityInput">0</output>
+                            <output name="usabilityValue" id="usabilityValue" for="usabilityInput" class="mr-4">0</output>
 
-                            <label for="content_rating">Content rating</label>
-                            <input type="range" id="contentInput" name="content_rating" min="0" max="10" value="0" step="0.5" oninput="contentValue.value=contentInput.value">
-                            <output name="contentValue" id="contentValue" for="contentInput">0</output>
+                            <label for="content_rating" class="mt-2">Content rating</label>
+                            <input type="range" id="contentInput" name="content_rating" min="0" max="10" value="0" step="0.5" oninput="contentValue.value=contentInput.value" >
+                            <output name="contentValue" id="contentValue" for="contentInput" class="mr-4">0</output>
 
-                            <input type="submit" value="post">
+                            <input type="submit" value="post" class="mt-2">
                         </form>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             </div>
@@ -60,6 +67,37 @@
     
       </div>
     </div>
+    <div class="row flex-lg-nowrap">  
+        <div class="col">
+          <div class="row">
+            <div class="col mb-3">
+              <div class="card">
+                <div class="card-body">
+                  <div class="e-profile">
+                    {% for review in project_reviews %}
+                    <div class="row">
+                        <div class="col-md-3">
+                            <p>{{review}}</p>
+                        </div>
+                        <div class="col-md-9">
+                            <p>{{ review.comment }}</p>
+                            <div class="user_rating">
+                                <small>Design -{{design_average}}</small>
+                                <small class="ml-2">Usability -{{usability_average}}</small>
+                                <small class="ml-2">Content -{{content_average}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <hr>
+                    {% endfor %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+      
+        </div>
+      </div>
     </div>
 
 {% endblock %}
