@@ -74,12 +74,10 @@ def profileView(request):
     current_user_id = current_user.id    
     curentProfile = Profile.objects.get(id=current_user_id)
 
-    print(curentProfile)
-
     form = profileForm( instance= curentProfile)
-    
     current_user_profile=[]
     cpp = []
+    
     for profile in all_profiles:
         if current_user_id:
             current_user_profile = profile
