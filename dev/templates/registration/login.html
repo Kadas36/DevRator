@@ -3,10 +3,11 @@
 {% block content %}
 <div class="container">
     
-      {% if form.errors %}
-        <p> Password or Username is incorrect </p>
-      {% endif %}
+      
         <form  action="/accounts/login/" method="post" class="box">
+            {% if form.errors %}
+              <p> Password or Username is incorrect </p>
+            {% endif %}
             <h1>Login</h1>
             {% csrf_token %}
             {% bootstrap_form form%}

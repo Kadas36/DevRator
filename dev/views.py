@@ -1,6 +1,4 @@
 from django.contrib.auth.models import User
-from django.db.models.expressions import Random
-import random
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Profile,Project,Review
 from django.contrib.auth.decorators import login_required
@@ -51,16 +49,13 @@ def new_project(request):
     for profile in all_profiles:
         if current_user_id:
             current_user_profile = profile
-
-    for profile in all_profiles:
-        if current_user_id:
             if request.method == 'POST':
                 form = projectForm(request.POST, request.FILES)
                 if form.is_valid():
                     post = form.save(commit=False)
                     post.developer = profile
                     post.save()
-                    return redirect('newpost')
+                    return redirect('home')
             else:
                 form = projectForm()
 
@@ -116,21 +111,34 @@ def Reviewview(request, project_id):
     project_reviews = Review.objects.filter(project=project_id)
     all_profiles = Profile.objects.all()
     current_user_id = current_user.id
-    current_user_profile = Profile.objects.filter(user=current_user)
-
+    
     reviews = Review.objects.filter(project=project_id)
+
     design_rating_average = reviews.aggregate(Avg("design_rating"))["design_rating__avg"]
-    design_average = round(design_rating_average,1)
+    if design_rating_average == None:
+        design_average = 0
+    else:
+        design_average = round(design_rating_average,1)
+
     usability_rating_average = reviews.aggregate(Avg("usability_rating"))["usability_rating__avg"]
-    usability_average = round(usability_rating_average,1)
+    if usability_rating_average == None:
+        usability_average = 0
+    else:
+        usability_average = round(usability_rating_average,1)
+
     content_rating_average = reviews.aggregate(Avg("content_rating"))["content_rating__avg"]
-    content_average = round(content_rating_average,1)
+    if content_rating_average == None:
+        content_average = 0
+    else:    
+        content_average = round(content_rating_average,1)
 
     sum = design_average+usability_average+content_average
     average = round(int(sum)/3,2)
     
+    current_user_profile=[]
     for profile in all_profiles:
         if current_user_id:
+            current_user_profile = profile
             if request.method == 'POST':
                 form = reviewForm(request.POST)
                 if form.is_valid():

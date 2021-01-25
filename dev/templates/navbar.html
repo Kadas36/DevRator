@@ -43,7 +43,7 @@
                                </a>    
                                <ul class="dropdown-menu" role="menu">
                                    <li>   
-                                       <a href="#" class="dropdown-item"><i class="fa fa-user-o"></i> <span>{{ current_user_profile | title}}</span></a>    
+                                       <a href="{{ '/profile/' }}" class="dropdown-item"><i class="fa fa-user-o"></i> <span>{{ current_user_profile | title}}</span></a>    
                                        <hr>
                                     </li>
                                    <li>
@@ -51,7 +51,7 @@
                                    </li>
                                    <li>
                                        <div class="dropdown-divider"></div>
-                                           <a href="{{ 'accounts/logout' }}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
+                                           <a href="{% url 'logout' %}" class="dropdown-item"><i class="material-icons">&#xE8AC;</i> Logout</a></a>
                                        </div>
                                    </li>
                                </ul>

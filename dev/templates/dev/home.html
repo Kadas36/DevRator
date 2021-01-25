@@ -19,27 +19,46 @@
                 <h4 class="card-title">{{ lead_project.developer.user.username | title}}</h4>
             </div>
         </div>
+        <div class="intro text-center">
+            <p>Get to see what fellow developers are upto. Be part of their development projects by submitting your review.</p>
+            <p>Want to improve your projects? Submit them for review.</p>
+            <p>click on the arrow on the project image thumbnail to review a project.</p>
+            <h1>AT RATEDEV, WE BELIEVE IN GROWING TOGETHER</h1>
+        </div>
         
         <div class="row">
             {% for project in projects %}
                 <div class="col-md-4">
                     <div class="card mt-4">
-                        <div class="profileflex ml-0" style="color: black; background-color: #a4c3b2;">
-                            {% if project.developer.profile_pic.url %}
-                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
-                            {% else %}
-                                <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
-                            {% endif %}
-                            <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
-                        </div>
-                        
+                        <div class="card-header">
+                            <div class="profileflex ml-0" style="color: black; background-color: #a4c3b2;">
+                                {% if project.developer.profile_pic.url %}
+                                    <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
+                                {% else %}
+                                    <a href="#" data-toggle="dropdown" class="nav-link user-action"><i class="fa fa-user-circle-o avatar"></i></a>
+                                {% endif %}
+                                <h4 class="card-title">{{ project.developer.user.username | title}}</h4>
+                            </div>
+                        </div>                        
                         <div class="container-image" style="position: relative; text-align: center;color: white;">
                             <img alt="Photo" class="card-img-top img-fluid" src="{{ project.image.url }}" style="height: 300px; width: auto;">
                             <div class="card-img-overlay profileflex position-button" style="position: absolute; bottom: 10px; right: 2px;">
                                 <div class="view-button">
                                     <a href="{% url 'review' project_id=project.id %}"><i class="fa fa-share fa-3x" id="fa" aria-hidden="true" style="color: white;"></i></a>
+                                    <a href="{% url 'review' project_id=project.id %}"><small class="d-block" style="color: black;">Click to review</small></a>
                                 </div>
                             </div>
+                        </div>
+                        <hr>
+                        <div class="card-title" style="display: flex; justify-content: space-between;">
+                            <h5 class="pl-4">{{ project.title | title}}</h5>
+                            <div class="linksite mr-2 text-center" style="border: 1px solid #a4c3b2; width: 100px; border-radius: 20px;">
+                                <a href="{{ project.link }}"><small>Visit Website</small></a>
+                            </div>
+                        </div>
+                        
+                        <div class="card-footer">
+                            <p>{{ project.description | title | truncatechars:200}}</p>
                         </div>
                     </div>
                 </div>    	

@@ -16,7 +16,7 @@
                   <div class="row">
                     <div class="col-12 col-sm-auto mb-3">
                         <img class="card-img-top img-responsive" src="{{project.image.url}}">
-                        <div class="card-img-overlay profileflex">
+                        <div class="card-img-overlay profileflex" style="color: white;">
                             {% if lead_project.developer.profile_pic.url %}
                                 <a href="#" data-toggle="dropdown" class="nav-link user-action"><img src="{{ lead_project.developer.profile_pic.url}}" class="avatar" alt="Avatar"></a>
                             {% else %}
@@ -27,10 +27,10 @@
                     </div>
                   </div>
                   <div class="ratings" style="color: blue; font-weight: bolder;">
-                      <h5 style="color: #991b16;">Rating -{{average}}</h5>
-                      <p>Design -{{design_average}}</p>
-                      <p>Usability -{{usability_average}}</p>
-                      <p>Content -{{content_average}}</p>
+                      <h5 style="color: #991b16;">Rating -  {{average}}</h5>
+                      <p><i class="fa fa-star-half-o" aria-hidden="true"></i>Design    -  {{design_average}}</p>
+                      <p><i class="fa fa-star-half-o" aria-hidden="true"></i>Usability -  {{usability_average}}</p>
+                      <p><i class="fa fa-star-half-o" aria-hidden="true"></i>Content   -  {{content_average}}</p>
                   </div>
                   <ul class="nav nav-tabs">
                     <li class="nav-item"><a href="" class="active nav-link">Review</a></li>
@@ -39,7 +39,7 @@
                     <div class="tab-pane active">
                         <form method="post" enctype="multipart/form-data" action="{% url 'review' project.id %}">
                             {%csrf_token%}
-                            <label for="comment">Review</label>
+                            <label for="comment">comment</label>
                             <textarea name="comment" id="comment" cols="30" rows="3" class="form-control mt-2"></textarea>
 
                             <label for="design_rating" class="mt-2">Design rating</label>
@@ -82,9 +82,9 @@
                         <div class="col-md-9">
                             <p>{{ review.comment }}</p>
                             <div class="user_rating">
-                                <small>Design -{{design_average}}</small>
-                                <small class="ml-2">Usability -{{usability_average}}</small>
-                                <small class="ml-2">Content -{{content_average}}</small>
+                                <small>Design -  {{design_average}}</small>
+                                <small class="ml-2">Usability -  {{usability_average}}</small>
+                                <small class="ml-2">Content -  {{content_average}}</small>
                             </div>
                         </div>
                     </div>

@@ -29,9 +29,9 @@ class Review(models.Model):
     reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
     comment = models.TextField(max_length=1000)
-    design_rating = models.FloatField(default=0)
-    usability_rating = models.FloatField(default=0)
-    content_rating = models.FloatField(default=0)
+    design_rating = models.FloatField(default=1)
+    usability_rating = models.FloatField(default=1)
+    content_rating = models.FloatField(default=1)
 
     def __str__(self):
         return str(self.reviewer.user.username)

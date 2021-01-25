@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from django.conf import settings
 
 urlpatterns = [
     path('', views.dev_home, name='home'),
@@ -11,4 +13,7 @@ urlpatterns = [
     path('api/profile/profile-id/<int:pk>/',views.ProfileDescription.as_view()),
     path('api/project/project-id/<int:pk>/',views.ProjectDescription.as_view()),
 ]
+
+if settings.DEBUG:
+    urlpatterns+= static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
 
