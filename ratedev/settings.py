@@ -92,7 +92,7 @@ WSGI_APPLICATION = 'ratedev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'developer',
+        'NAME': 'devrate',
         'USER': 'moringa',
         'PASSWORD':'kadas36',
     }

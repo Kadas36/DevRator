@@ -12,7 +12,7 @@
         <h3>Your projects</h3>  
         {% for project in cpp %}  
         <ul class="nav">
-          <li class="nav-item"><a class="nav-link px-2 active" href="./overview.html"><i class="fa fa-fw fa-pencil-square-o mr-1"></i><span>{{project}}</span></a></li>
+          <li class="nav-item"><a class="nav-link px-2 active" href="{{project.link}}"><i class="fa fa-fw fa-pencil-square-o mr-1"></i><span>{{project}}</span></a></li>
         </ul>
         {% endfor %}
       </div>
@@ -27,12 +27,8 @@
             <div class="e-profile">
               <div class="row">
                 <div class="col-12 col-sm-auto mb-3">
-                  <div class="mx-auto" style="width: 140px;">
-                    <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
-                      <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
-                        <img src="{{ current_user_profile.image.url }}" alt="">
-                      </span>
-                    </div>
+                  <div class="mx-auto">
+                    <img src="{{ current_user_profile.profile_pic.url}}" class="avatar" alt="avatar" style="width: 140px; overflow: hidden; border-radius: 50%; width: 200px; height: 200px;">  
                   </div>
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
@@ -46,7 +42,7 @@
                   </div>
                   <div class="text-center text-sm-right">
                     <span class="badge badge-secondary">Bio</span>
-                    <div class="text-muted"><small>{{ current_user_profile.bio }}</small></div>
+                    <div><small>{{ current_user_profile.bio }}</small></div>
                   </div>
                 </div>
               </div>
@@ -55,7 +51,7 @@
               </ul>
               <div class="tab-content pt-3">
                 <div class="tab-pane active">
-                    <form method="post" enctype="multipart/form-data">
+                    <form method="post" enctype="multipart/form-data" >
                         {%csrf_token%}
                     
                         {% bootstrap_form form %}
@@ -71,11 +67,12 @@
       <div class="col-12 col-md-3 mb-3">
         <div class="card mb-3">
           <div class="card-body">
-            <div class="px-xl-3">
+            <a href="{% url 'logout' %}">
+              <div class="px-xl-3">
                 <i class="fa fa-sign-out"></i>
                 <span>Logout</span>
-              </button>
             </div>
+            </a>
           </div>
         </div>
       </div>

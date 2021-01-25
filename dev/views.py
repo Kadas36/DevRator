@@ -78,24 +78,20 @@ def profileView(request):
 
     form = profileForm( instance= curentProfile)
     
-    for profile in all_profiles:
-        if current_user_id:
-            if request.method == 'POST':
-                form = profileForm(request.POST, request.FILES, instance=profile)
-                if form.is_valid():
-                    form.save()
-                    return redirect('profile')
-            
     current_user_profile=[]
     cpp = []
     for profile in all_profiles:
         if current_user_id:
             current_user_profile = profile
             cpp = Project.objects.filter(developer=current_user_profile)
-            
-            
+            if request.method == 'POST':
+                form = profileForm(request.POST, request.FILES, instance=profile)
+                if form.is_valid():
+                    form.save()
+                    return redirect('profile')
+                      
     context = {
-        "ccurrent_user_profilep": current_user_profile,
+        "current_user_profile": current_user_profile,
         'cpp': cpp,
         'form': form
     }
@@ -137,8 +133,8 @@ def Reviewview(request, project_id):
     
     current_user_profile=[]
     for profile in all_profiles:
+        current_user_profile = profile
         if current_user_id:
-            current_user_profile = profile
             if request.method == 'POST':
                 form = reviewForm(request.POST)
                 if form.is_valid():
