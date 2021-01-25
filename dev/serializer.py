@@ -10,12 +10,12 @@ class UserSerializer(serializers.ModelSerializer):
 class ProfileSerializer(serializers.ModelSerializer):
     class Meta:
         model = Profile
-        fields = ('user', 'bio', 'profile_pic', 'contact')
+        fields = ('id','user', 'bio', 'profile_pic', 'contact')
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model = Project
-        fields = ('developer', 'title', 'image', 'description', 'link')
+        fields = ('id','developer', 'title', 'image', 'description', 'link')
 
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:

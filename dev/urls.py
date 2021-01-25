@@ -8,4 +8,7 @@ urlpatterns = [
     path('project/<int:project_id>/', views.Reviewview, name='review'),
     path('api/profiles/', views.ProfileList.as_view()),
     path('api/projects/', views.ProjectList.as_view()),
+    path('api/profile/profile-id/<int:pk>/',views.ProfileDescription.as_view()),
+    path('api/project/project-id/<int:pk>/',views.ProjectDescription.as_view()),
 ]
+
