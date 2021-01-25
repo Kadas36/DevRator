@@ -12,23 +12,33 @@ def dev_home(request):
     projects = Project.objects.all()
     lead_projects = Project.objects.order_by("?")
     lead_project = lead_projects.first()
-    print(lead_project)
+    current_user = request.user
+    current_user_id = current_user.id
+    all_profiles = Profile.objects.all()
+    current_user_profile=[]
+    for profile in all_profiles:
+        if current_user_id:
+            current_user_profile = profile
 
     context = {
         'projects': projects,
-        'lead_project': lead_project
+        'lead_project': lead_project,
+        'current_user_profile': current_user_profile,
     }
 
     return render(request, 'dev/home.html', context)
-
 
 @login_required(login_url='/accounts/login/')
 def new_project(request):
     form = projectForm()
     current_user = request.user
     current_user_id = current_user.id
-    current_user_profile = Profile.objects.filter(user=current_user)
     all_profiles = Profile.objects.all()
+
+    current_user_profile=[]
+    for profile in all_profiles:
+        if current_user_id:
+            current_user_profile = profile
 
     for profile in all_profiles:
         if current_user_id:
@@ -44,6 +54,7 @@ def new_project(request):
 
     context = {
         "form": form,
+        "current_user_profile": current_user_profile
     }
 
     return render(request, 'dev/new_project.html', context)  
@@ -68,16 +79,16 @@ def profileView(request):
                     form.save()
                     return redirect('profile')
             
-    cp=[]
+    current_user_profile=[]
     cpp = []
     for profile in all_profiles:
         if current_user_id:
-            cp = profile
-            cpp = Project.objects.filter(developer=cp)
+            current_user_profile = profile
+            cpp = Project.objects.filter(developer=current_user_profile)
             
             
     context = {
-        "cp": cp,
+        "ccurrent_user_profilep": current_user_profile,
         'cpp': cpp,
         'form': form
     }
@@ -93,6 +104,7 @@ def Reviewview(request, project_id):
     project_reviews = Review.objects.filter(project=project_id)
     all_profiles = Profile.objects.all()
     current_user_id = current_user.id
+    current_user_profile = Profile.objects.filter(user=current_user)
 
     reviews = Review.objects.filter(project=project_id)
     design_rating_average = reviews.aggregate(Avg("design_rating"))["design_rating__avg"]
@@ -121,6 +133,7 @@ def Reviewview(request, project_id):
     context = {
         "project": project,
         "form": form,
+        "current_user_profile": current_user_profile,
         'project_reviews': project_reviews,
         "design_average": design_average,
         "usability_average": usability_average,

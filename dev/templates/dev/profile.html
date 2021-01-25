@@ -30,14 +30,14 @@
                   <div class="mx-auto" style="width: 140px;">
                     <div class="d-flex justify-content-center align-items-center rounded" style="height: 140px; background-color: rgb(233, 236, 239);">
                       <span style="color: rgb(166, 168, 170); font: bold 8pt Arial;">
-                        <img src="{{ cp.image.url }}" alt="">
+                        <img src="{{ current_user_profile.image.url }}" alt="">
                       </span>
                     </div>
                   </div>
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                     <div class="text-center text-sm-left mb-2 mb-sm-0">
-                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{cp}}</h4>
+                      <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{current_user_profile}}</h4>
                     </div>
                 </div>
                 <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
@@ -46,7 +46,7 @@
                   </div>
                   <div class="text-center text-sm-right">
                     <span class="badge badge-secondary">Bio</span>
-                    <div class="text-muted"><small>{{ cp.bio }}</small></div>
+                    <div class="text-muted"><small>{{ current_user_profile.bio }}</small></div>
                   </div>
                 </div>
               </div>
