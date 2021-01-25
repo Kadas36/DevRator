@@ -1,3 +1,4 @@
+from django.contrib.auth.models import User
 from django.db.models.expressions import Random
 import random
 from django.shortcuts import render, redirect, get_object_or_404
@@ -5,6 +6,12 @@ from .models import Profile,Project,Review
 from django.contrib.auth.decorators import login_required
 from .forms import projectForm, profileForm, reviewForm
 from django.db.models import Avg
+
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from .serializer import UserSerializer, ProfileSerializer,ProjectSerializer,ReviewSerializer
+
+
 # Create your views here.
 
 @login_required(login_url='/accounts/login/')
@@ -140,4 +147,10 @@ def Reviewview(request, project_id):
         "content_average": content_average,
         "average": average,
     }
-    return render(request, 'dev/review.html', context)       
+    return render(request, 'dev/review.html', context) 
+
+class UserList(APIView):
+    def get(self, request, format=None):
+        all_users = User.objects.all()
+        serializers = UserSerializer(all_users, many=True)
+        return Response(serializers.data)       
