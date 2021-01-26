@@ -49,15 +49,19 @@ def new_project(request):
     for profile in all_profiles:
         if current_user_id:
             current_user_profile = profile
+            print("first", form)   
             if request.method == 'POST':
                 form = projectForm(request.POST, request.FILES)
+                print("second", form) 
                 if form.is_valid():
                     post = form.save(commit=False)
                     post.developer = profile
                     post.save()
                     return redirect('home')
+            
             else:
                 form = projectForm()
+         
 
     context = {
         "form": form,
@@ -77,7 +81,7 @@ def profileView(request):
     form = profileForm( instance= curentProfile)
     current_user_profile=[]
     cpp = []
-    
+
     for profile in all_profiles:
         if current_user_id:
             current_user_profile = profile

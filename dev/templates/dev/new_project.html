@@ -9,7 +9,7 @@
     <div class="postImage">
         <h2>Submit Your Project</h2>
         <hr>
-        <form method="post" enctype="multipart/form-data">
+        <form method="post" enctype="multipart/form-data" action="{% url 'newpost' %}">
             {%csrf_token%}
         
             {% bootstrap_form form %}

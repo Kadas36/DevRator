@@ -14,6 +14,19 @@ class Profile(models.Model):
     def __str__(self):
         return str(self.user.username)
 
+    def save_profile(self):
+        self.save()
+
+    def delete_profile(self):
+        self.delete()
+ 
+    def update_profile(self,new_profile):
+        self.profile_pic = new_profile.profile_pic
+        self.bio = new_profile.bio
+        self.contact = new_profile.contact
+        self.save()      
+    
+
 class Project(models.Model):
     developer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     title = models.TextField() 
@@ -25,6 +38,13 @@ class Project(models.Model):
     def __str__(self):
         return str(self.title)  
 
+    def save_project(self):
+        self.save()
+
+    def delete_project(self):
+        self.delete()
+
+    
 class Review(models.Model):
     reviewer = models.ForeignKey(Profile, on_delete=models.CASCADE)
     project = models.ForeignKey(Project, on_delete=models.CASCADE)
@@ -35,4 +55,10 @@ class Review(models.Model):
 
     def __str__(self):
         return str(self.reviewer.user.username)
+
+    def save_review(self):
+        self.save()
+
+    def delete_review(self):
+        self.delete()    
 
